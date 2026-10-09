@@ -1,0 +1,161 @@
+{
+  "entities": {
+    "House": {
+      "title": "House",
+      "description": "Competitive house/team participating in festival",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "motto": { "type": "string" },
+        "color": { "type": "string" },
+        "accentColor": { "type": "string" },
+        "captain": { "type": "string" },
+        "viceCaptain": { "type": "string" },
+        "points": { "type": "number" },
+        "firstCount": { "type": "number" },
+        "secondCount": { "type": "number" },
+        "thirdCount": { "type": "number" },
+        "gradeACount": { "type": "number" },
+        "gradeBCount": { "type": "number" },
+        "gradeCCount": { "type": "number" },
+        "registeredCount": { "type": "number" },
+        "logoEmoji": { "type": "string" }
+      },
+      "required": ["id", "name", "color", "points"]
+    },
+    "Program": {
+      "title": "Program",
+      "description": "Arts fest competition program event",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "department": { "type": "string" },
+        "day": { "type": "number" },
+        "stage": { "type": "string" },
+        "timeSlot": { "type": "string" },
+        "maxDurationMins": { "type": "number" },
+        "status": { "type": "string" },
+        "coordinatorName": { "type": "string" },
+        "judges": { "type": "array" },
+        "criteria": { "type": "array" },
+        "isGroup": { "type": "boolean" },
+        "venueDetail": { "type": "string" },
+        "maxMarks": { "type": "number" }
+      },
+      "required": ["id", "code", "title", "day", "stage"]
+    },
+    "Candidate": {
+      "title": "Candidate",
+      "description": "Registered student contestant",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "chestNumber": { "type": "string" },
+        "name": { "type": "string" },
+        "houseId": { "type": "string" },
+        "category": { "type": "string" },
+        "gradeSection": { "type": "string" },
+        "phoneEncrypted": { "type": "string" },
+        "parentContactEncrypted": { "type": "string" },
+        "registeredPrograms": { "type": "array" },
+        "attendanceStatus": { "type": "string" },
+        "totalPointsWon": { "type": "number" },
+        "photoUrl": { "type": "string" }
+      },
+      "required": ["id", "chestNumber", "name", "houseId"]
+    },
+    "ProgramResult": {
+      "title": "ProgramResult",
+      "description": "Evaluated scores, grades, and declared ranks for an event",
+      "type": "object",
+      "properties": {
+        "programId": { "type": "string" },
+        "isAnnounced": { "type": "boolean" },
+        "announcedTimestamp": { "type": "string" },
+        "announcedBy": { "type": "string" },
+        "scores": { "type": "array" }
+      },
+      "required": ["programId", "isAnnounced", "scores"]
+    },
+    "CrewMember": {
+      "title": "CrewMember",
+      "description": "Stage coordinator and logistics staff member",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "department": { "type": "string" },
+        "phone": { "type": "string" },
+        "assignedPrograms": { "type": "array" }
+      },
+      "required": ["id", "name", "role"]
+    },
+    "CrewTask": {
+      "title": "CrewTask",
+      "description": "Logistics and stage management milestone task",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "crewMemberId": { "type": "string" },
+        "title": { "type": "string" },
+        "priority": { "type": "string" },
+        "day": { "type": "number" },
+        "dueDate": { "type": "string" },
+        "stage": { "type": "string" },
+        "completed": { "type": "boolean" }
+      },
+      "required": ["id", "crewMemberId", "title", "completed"]
+    },
+    "FestNotification": {
+      "title": "FestNotification",
+      "description": "Broadcast stage alert or result notification",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "type": { "type": "string" },
+        "read": { "type": "boolean" },
+        "programId": { "type": "string" },
+        "houseId": { "type": "string" }
+      },
+      "required": ["id", "title", "message", "type", "read"]
+    }
+  },
+  "firestore": {
+    "/houses/{houseId}": {
+      "schema": { "$ref": "#/entities/House" },
+      "description": "Competitive school houses with points and medal tallies"
+    },
+    "/programs/{programId}": {
+      "schema": { "$ref": "#/entities/Program" },
+      "description": "Festival competition programs and schedules"
+    },
+    "/candidates/{candidateId}": {
+      "schema": { "$ref": "#/entities/Candidate" },
+      "description": "Enrolled student contestants with chest numbers and photos"
+    },
+    "/results/{programId}": {
+      "schema": { "$ref": "#/entities/ProgramResult" },
+      "description": "Tabulated scores and verified ranks per program"
+    },
+    "/crewMembers/{memberId}": {
+      "schema": { "$ref": "#/entities/CrewMember" },
+      "description": "Operations crew members and their assigned programs"
+    },
+    "/crewTasks/{taskId}": {
+      "schema": { "$ref": "#/entities/CrewTask" },
+      "description": "Operational checklists and venue management tasks"
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/FestNotification" },
+      "description": "Real-time alerts, live stage calls, and result notifications"
+    }
+  }
+}

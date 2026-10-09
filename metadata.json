@@ -1,0 +1,6 @@
+{
+  "name": "KalaUtsav - School Arts Fest Manager",
+  "description": "Comprehensive 3-day school arts festival management system with real-time scoring, automated grading rubrics, candidate rosters, judge dashboard, live leaderboards, crew workload tracking, and PDF/CSV analytics reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

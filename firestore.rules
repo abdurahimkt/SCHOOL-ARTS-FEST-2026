@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Connection testing doc
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+
+    // Competitive houses: public read for leaderboard, write for coordinator/admin
+    match /houses/{houseId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Programs schedule: public read, write for staff/admin
+    match /programs/{programId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Candidate directory & registration: public read, create for students/desk, update for scores
+    match /candidates/{candidateId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Program results & scoring: public read for announced results, write for judges/admin
+    match /results/{programId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Operations crew members: read for staff, write for coordinator/admin
+    match /crewMembers/{memberId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Operations crew tasks: read and toggle for crew
+    match /crewTasks/{taskId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Live push alerts & notifications: public read, write for system and admin
+    match /notifications/{notificationId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}
